@@ -3,17 +3,17 @@ import express from "express";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// API lấy phiên mới nhất
+// API trả về 1 phiên mới nhất (gọn gàng)
 app.get("/api/taixiu", async (req, res) => {
   try {
-    const response = await fetch("https://sun-predict-5ghi.onrender.com/api/taixiu/history");
+    const response = await fetch("https://yourdomain.onrender.com/api/taixiu/history");
     const historyData = await response.json();
 
     if (!Array.isArray(historyData) || historyData.length === 0) {
       return res.json({ error: "Chưa có dữ liệu API" });
     }
 
-    const latest = historyData[0];
+    const latest = historyData[0]; // phiên mới nhất
 
     const result = {
       Phien: latest.session,
@@ -31,10 +31,10 @@ app.get("/api/taixiu", async (req, res) => {
   }
 });
 
-// API history
-app.get("/api/tx", async (req, res) => {
+// API trả về lịch sử đầy đủ (giữ nguyên)
+app.get("/api/taixiu/history", async (req, res) => {
   try {
-    const response = await fetch("https://sun-predict-5ghi.onrender.com/api/taixiu/history");
+    const response = await fetch("https://yourdomain.onrender.com/api/taixiu/history");
     const data = await response.json();
     res.json(data);
   } catch (err) {
@@ -44,5 +44,5 @@ app.get("/api/tx", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server đang chạy tại http://localhost:${PORT}`);
+  console.log(`✅ Server đang chạy tại http://localhost:${PORT}`);
 });
