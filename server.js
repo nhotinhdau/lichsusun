@@ -1,5 +1,4 @@
 import express from "express";
-import fetch from "node-fetch";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -7,7 +6,6 @@ const PORT = process.env.PORT || 3000;
 // API lấy phiên mới nhất
 app.get("/api/taixiu", async (req, res) => {
   try {
-    // Gọi tới API history (bạn đổi URL thành link thật của bạn)
     const response = await fetch("https://sun-predict-5ghi.onrender.com/api/taixiu/history");
     const historyData = await response.json();
 
@@ -15,10 +13,8 @@ app.get("/api/taixiu", async (req, res) => {
       return res.json({ error: "Chưa có dữ liệu API" });
     }
 
-    // Lấy phiên mới nhất (phần tử đầu tiên)
     const latest = historyData[0];
 
-    // Format lại JSON gọn
     const result = {
       Phien: latest.session,
       Xuc_xac_1: latest.dice[0],
@@ -35,8 +31,8 @@ app.get("/api/taixiu", async (req, res) => {
   }
 });
 
-// API history (nếu muốn proxy ra luôn)
-app.get("/api/taixiu/history", async (req, res) => {
+// API history
+app.get("/api/tx", async (req, res) => {
   try {
     const response = await fetch("https://sun-predict-5ghi.onrender.com/api/taixiu/history");
     const data = await response.json();
