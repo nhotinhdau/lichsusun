@@ -4,7 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Link API gốc (bạn thay đúng link trong ảnh vào đây)
-const API_URL = "https://sun-predict-5ghi.onrender.com/api/taixiu/history";  
+const API_URL = "https://suncac.onrender.com/api/taixiu/history";  
 
 app.get("/api/taixiu", async (req, res) => {
   try {
@@ -35,3 +35,4 @@ app.get("/api/taixiu", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Server chạy tại http://localhost:${PORT}`);
 });
+
